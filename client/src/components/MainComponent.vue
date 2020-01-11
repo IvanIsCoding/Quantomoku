@@ -1,5 +1,7 @@
 <template>
-  <div class="hello">Our cool QuantumOku</div>
+  <div class="hello">
+    <button @click="devina">call devina function</button>
+  </div>
 </template>
 
 <script>
@@ -7,6 +9,11 @@ export default {
   name: "HelloWorld",
   props: {
     msg: String
+  },
+  methods: {
+    devina: function() {
+      alert("devina function called");
+    }
   }
 };
 </script>
