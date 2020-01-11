@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" width="300px"/>
-    <MainComponent />
+    <Board />
   </div>
 </template>
 
 <script>
-import MainComponent from "./components/MainComponent.vue";
+import Board from "./components/Board.vue";
 
 export default {
   name: "app",
   components: {
-    MainComponent
+    Board
   }
 };
 </script>
