@@ -1,9 +1,11 @@
 <template>
   <!-- <div class="hello">Our cool QuantumOku</div> -->
   <div>
-    <li v-for="cell in cells">
-      </Cell>
-    </li>
+    <div v-for="line in cells" :key="line[0]">
+      <span v-for="cell in line" :key="cell">
+        <Cell />
+      </span>
+    </div>
   </div>
 </template>
 
@@ -17,29 +19,25 @@ export default {
   },
   components: {
     Cell
-  }, 
+  },
+  methods: {
+    make2dArray(d1, d2) {
+      var count = 0;
+      var arr = [];
+      for (let i = 0; i < d2; i++) {
+        var innerArray = [count++];
+        for (let j = 0; j < d1; j++) {
+          innerArray.push(count++);
+        }
+        arr.push(innerArray);
+      }
+      return arr;
+    }
+  },
   data() {
     return {
-      cells: [0, 0, 0]
-    }
+      cells: this.make2dArray(19, 19)
+    };
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

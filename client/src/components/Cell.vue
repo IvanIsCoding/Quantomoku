@@ -1,5 +1,7 @@
 <template>
-  <div>Cell</div>
+  <span>
+    <img src="../assets/cell.png" width="20px" height="20px" />
+  </span>
 </template>
 
 <script>
@@ -11,6 +13,9 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+img {
+  text-align: center;
+  display: block;
+}
 </style>
