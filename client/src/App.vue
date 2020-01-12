@@ -24,16 +24,17 @@ import Tutorial from "./components/Tutorial.vue";
 import io from "socket.io-client";
 var socket = io("http://localhost:8000");
 
-socket.on("message", function(data) {
-  console.log(data);
-  // this.receiveNewDataFromBackend(data);
-});
-
 export default {
   name: "app",
   components: {
     BoardRenderer,
     Tutorial
+  },
+  created() {
+    var __self = this;
+    socket.on("message", function(data) {
+      __self.receiveNewDataFromBackend(data);
+    });
   },
   methods: {
     /* eslint-disable no-console */
@@ -70,6 +71,9 @@ export default {
       this.winner = dataFromBackend.winner;
       this.invalid = dataFromBackend.invalid;
       this.invalidMessage = dataFromBackend.invalidMessage;
+    },
+    myFun() {
+      alert("hey");
     },
     cellClicked(id) {
       if (!this.playedCells.includes(id)) {
