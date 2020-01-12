@@ -1,22 +1,27 @@
 <template>
   <div id="app">
-    turns left before automatic measurement: {{4 - measurementTurn}}
-    <div v-if="measurementTurn == 4">measured at this turn</div>
-    <div class="buttons">
-      <button @click="openTutorial">tutorial</button>
-      <button class="active" @click="sendDataToBackend">confirm</button>
-      <button
-        @click="cancel"
-        :disabled="this.playedCells.length == 0"
-        :class="this.playedCells.length == 0? 'forceNoHoverAnimation': ''"
-      >cancel</button>
-      <BoardRenderer
+    <div  class="buttons" >
+    <button @click="openTutorial">Tutorial</button></div>
+    Turns left before automatic measurement: {{4 - measurementTurn}}
+    
+    <div v-if="measurementTurn == 4">Measured at this turn</div>
+    
+    <BoardRenderer
         v-if="!showTutorial"
         @cellClicked="cellClicked"
         :selectedCells="this.playedCells"
         :board="this.board"
       />
       <Tutorial v-else />
+      <div class="buttons">
+      
+      <button class="active" @click="sendDataToBackend">Confirm</button>
+      <button
+        @click="cancel"
+        :disabled="this.playedCells.length == 0"
+        :class="this.playedCells.length == 0? 'forceNoHoverAnimation': ''"
+      >Cancel</button>
+      
     </div>
   </div>
 </template>
@@ -137,7 +142,7 @@ export default {
   },
   data() {
     return {
-      board: this.makeBoard(19, 19),
+      board: this.makeBoard(15, 15),
       playerTurn: "x",
       playedCells: [],
       measurementTurn: 0,
@@ -167,24 +172,30 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Sniglet&display=swap');
+
 html {
   background-image: url("assets/bg.png");
   background-size: cover;
   background-repeat: no-repeat;
+
 }
 
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+    font-family: 'Sniglet', sans-serif;
+    font-size: 16pt;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 .buttons {
+  margin: 10px 0;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 button {
@@ -196,8 +207,11 @@ button {
   background: url("assets/button_2.gif") 0 0 no-repeat;
 
   border-style: none;
-  font-family: sans-serif;
   margin: 0 3px;
+
+  font-size: 15pt;
+    font-family: 'Sniglet', sans-serif;
+
 }
 
 button:hover {

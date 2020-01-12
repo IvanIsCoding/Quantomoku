@@ -39,7 +39,7 @@ export default {
   border-style:solid;
   border-radius: 5px;
   border-width: 10px;
-  width: auto;
+  width: 782px;
   display: block;
   margin: auto;
   background-image: url("../assets/board.png");
