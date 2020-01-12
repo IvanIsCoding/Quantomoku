@@ -1,10 +1,14 @@
 <template>
   <div id="app">
-    <div  class="buttons" >
-      <div v-if="!showTutorial" class="player-turn pt-x"><img class="player-hl" src="./assets/P1.png" width="45px" height="45px"></div>
-    <button v-if="!showTutorial" @click="openTutorial">Tutorial</button>
-    <div v-if="!showTutorial" class="player-turn pt-o"><img class="player-hl" src="./assets/P2.png" width="45px" height="45px"></div>
-    <button v-if="showTutorial" @click="openTutorial">Play Game</button>
+    <div class="buttons">
+      <div v-if="!showTutorial" :class="playerTurn == 'x'? 'player-turn pt-active' : 'player-turn'">
+        <img class="player-hl" src="./assets/P1.png" width="45px" height="45px" />
+      </div>
+      <button v-if="!showTutorial" @click="openTutorial">Tutorial</button>
+      <div v-if="!showTutorial" :class="playerTurn == 'o'? 'player-turn pt-active' : 'player-turn'">
+        <img class="player-hl" src="./assets/P2.png" width="45px" height="45px" />
+      </div>
+      <button v-if="showTutorial" @click="openTutorial">Play Game</button>
     </div>
     Turns left before automatic measurement: {{5 - measurementTurn}}
     <div v-if="measurementTurn == 5">Measured at this turn</div>
@@ -14,10 +18,15 @@
       @cellClicked="cellClicked"
       :selectedCells="this.playedCells"
       :board="this.board"
+      :playerTurn="playerTurn"
     />
     <Tutorial v-else />
     <div class="buttons">
-      <button :disabled="showTutorial" @click="sendDataToBackend" :class="showTutorial? 'forceNoHoverAnimation': ''">Confirm</button>
+      <button
+        :disabled="showTutorial"
+        @click="sendDataToBackend"
+        :class="showTutorial? 'forceNoHoverAnimation': ''"
+      >Confirm</button>
       <button
         @click="cancel"
         :disabled="this.playedCells.length == 0"
@@ -216,9 +225,9 @@ button {
 
 .player-turn {
   background-color: rgba(100, 46, 25, 0.5);
-  border-radius: 15px; 
+  border-radius: 15px;
   max-height: 45px;
-  padding:2px;
+  padding: 2px;
   opacity: 0.25;
 }
 
