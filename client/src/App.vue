@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div  class="buttons" >
+      <div v-if="!showTutorial" class="player-turn"><img class="player-hl" src="./assets/P1.png" width="45px" height="45px"></div>
     <button v-if="!showTutorial" @click="openTutorial">Tutorial</button>
+    <div v-if="!showTutorial" class="player-turn"><img class="player-hl" src="./assets/P2.png" width="45px" height="45px"></div>
     <button v-if="showTutorial" @click="openTutorial">Play Game</button>
     </div>
     Turns left before automatic measurement: {{5 - measurementTurn}}
@@ -216,6 +218,18 @@ button {
   font-size: 15pt;
     font-family: 'Sniglet', sans-serif;
 
+}
+
+.player-turn {
+  background-color: rgba(100, 46, 25, 0.5);
+  border-radius: 15px; 
+  max-height: 45px;
+  padding:2px;
+  opacity: 0.25;
+}
+
+.pt-active {
+  opacity: 1;
 }
 
 button:hover {
