@@ -1,4 +1,4 @@
-# from qiskit import *
+from qiskit import Aer, ClassicalRegister, execute, QuantumCircuit, QuantumRegister
 
 
 def calculate_score(board_matrix, player_char):
@@ -21,7 +21,6 @@ def calculate_score(board_matrix, player_char):
         [(i, i) for i in range(5)],  # diagonal \
         [(-i, i) for i in range(5)],  # diagonal /
     ]
-    print(relative_pairs)
 
     for x in range(N):
         for y in range(N):
@@ -37,3 +36,103 @@ def calculate_score(board_matrix, player_char):
                 score += check_equal(cells)
 
     return score
+
+
+def is_full(board):
+    """Returns True if there are no empty cells"""
+    for row in board:
+        for cell in row:
+            if cell == "n":
+                return False  # foudn empty cell, not full
+
+    return True
+
+
+def get_winner(board):
+    """Returns "x", "o", "tie", or None """
+    relative_score = calculate_score(board, "x") - calculate_score(board, "o")
+
+    if relative_score > 0:
+        return "x"  # more Xs five line-ups than Os, X wins
+    elif relative_score < 0:
+        return "o"  # mirror case
+
+    # Board is full is a tie
+    if is_full(board):
+        return "tie"
+    else:
+        return None
+
+
+def check_invalid(board, selected_cells, player_char):
+    """Return if a move is invalid, and give appropriate error message"""
+    if len(selected_cells) == 0:
+        return (True, "You must select a cell to play for your movement!")
+    elif len(selected_cells) > 2:
+        return (True, "Too many cells were selected!")
+
+    # Check for movements that play with measured cells
+    for x, y in selected_cells:
+        if board_matrix[x][y] in ["o", "x"]:
+            return (True, "Measured cells cannot be selected!")
+
+    return (False, "")
+
+
+def update_board(board, selected_cells, player_char):
+    if len(selected_cells) == 1:
+        x, y = selected_cells[0]  # classical move
+        board[x][y] = player_char
+    else:
+        """Not implemented yet"""
+        pass
+
+
+def process_board(game_state):
+    """Given a dictionary of the game_state containing the keys:
+
+    - board: 2d matrix representation of the board state
+    - player_turn: "x" or "o", the player that played
+    - selected_cells: list of the coordinates of the cells
+    - measurement_turn: an integer from 0 to 4, indicating how many turns until global measurement
+
+    Returns a dictionary containing the following keys:
+    - board: updated 2d matrix representation of the board state
+    - player_turn: next player to play, "x" or "o"
+    - winner: "x", "o", "tie" or None
+    - invalid: True if the move was not valid, False otherwise
+    - invalid_message: message explaining why the movement is invalid
+    - measurement_turn: an integer from 0 to 4, indicating how many turns until global measurement
+    """
+
+    board = game_state["board"]
+    player_turn = game_state["player_turn"]
+    selected_cells = game_state["selected_cells"]
+    measurement_turn = game_state["measurement_turn"]
+
+    invalid, invalid_message = check_invalid(board, selected_cells, player_turn)
+
+    # Invalid movement: same player must play again
+    if invalid:
+        return {
+            "board": board,
+            "player_turn": player_turn,
+            "winner": get_winner(board),
+            "invalid": invalid,
+            "invalid_message": invalid_message,
+            "measurement_turn": measurement_turn,
+        }
+
+    update_board(board, selected_cells, player_turn)  #  do movement
+
+    next_turn = "x" if player_turn == "o" else "o"
+    next_measurement = (measurement_turn + 1) % 5
+
+    return {
+        "board": board,
+        "player_turn": next_turn,
+        "winner": get_winner(board),
+        "invalid": invalid,
+        "invalid_message": invalid_message,
+        "measurement_turn": next_measurement,
+    }
