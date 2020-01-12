@@ -2,7 +2,11 @@
   <div class="main">
     <div v-for="line in cells" :key="'line' + line[0]" class="boardRow">
       <div v-for="cell in line" :key="cell.id" class="boardCell">
-        <Cell :id="cell.id" @cellClicked="cellClicked" />
+        <Cell
+          :id="cell.id"
+          @cellClicked="cellClicked"
+          :selected="cell.id == selectedCells[0] || cell.id == selectedCells[1]"
+        />
       </div>
     </div>
   </div>
@@ -16,19 +20,21 @@ export default {
   components: {
     Cell
   },
+  props: {
+    selectedCells: Array
+  },
   methods: {
-    make2dArray(d1, d2) {
-      var count = 0;
-      var arr = [];
-      for (let i = 0; i < d2; i++) {
-        var innerArray = [];
-        for (let j = 0; j < d1; j++) {
-          var myId = count++;
-          innerArray.push({ id: myId });
+    make2dArray(rows, columns) {
+      var result = [];
+      for (var i = 0; i < rows; i++) {
+        var row = [];
+        for (var j = 0; j < columns; j++) {
+          row.push({ id: i + "" + j });
         }
-        arr.push(innerArray);
+        result.push(row);
       }
-      return arr;
+      print2dArray(result);
+      return result;
     },
     cellClicked(id) {
       this.$emit("cellClicked", id);
@@ -36,7 +42,7 @@ export default {
   },
   data() {
     return {
-      cells: this.make2dArray(19, 19)
+      cells: this.make2dArray(5, 5)
     };
   }
 };

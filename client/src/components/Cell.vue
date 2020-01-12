@@ -1,6 +1,6 @@
 <template>
   <div class="board-cell">
-    <img src="../assets/P1.png" width="40px" height="40px" @click="clicked" />
+    <img src="../assets/P1.png" width="40px" height="40px" @click="clicked" :class="this.selected? 'selected' : ''" />
   </div>
 </template>
 
@@ -8,7 +8,13 @@
 export default {
   name: "Cell",
   props: {
-    id: Number
+    id: String, 
+    selected: Boolean
+  },
+  data() {
+    return {
+      // selected: false
+    }
   },
   methods: {
     clicked() {
@@ -26,5 +32,9 @@ export default {
 img {
   /* text-align: center; */
   /* display: block; */
+  opacity: 0.5;
+}
+.selected {
+  opacity: 1;
 }
 </style>
