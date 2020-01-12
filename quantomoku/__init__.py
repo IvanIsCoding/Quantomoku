@@ -87,6 +87,32 @@ def update_board(board, selected_cells, player_char):
         """Not implemented yet"""
         pass
 
+def decode_board(original_board):
+
+    board = []
+
+    for row in original_board:
+        board.append([])
+        for json_cell in row:
+            board[-1].append(json_cell["value"])
+
+    return board
+
+def encode_board(board):
+
+    json_board = []
+
+    for row_number, row in enumerate(board):
+        json_board.append([])
+        for col_number, cell in enumerate(row):
+            json_board[-1].append({
+                    "id": "{},{}".format(row_number, col_number),
+                    "value": cell,
+                }
+            )
+
+    return json_board
+
 def process_board(game_state):
     """Given a dictionary of the game_state containing the keys:
 
@@ -104,7 +130,8 @@ def process_board(game_state):
     - measurement_turn: an integer from 0 to 4, indicating how many turns until global measurement
     """
 
-    board = game_state["board"]
+    original_board = game_state["board"]
+    board = decode_board(game_state["board"])
     player_turn = game_state["playerTurn"]
     selected_cells = game_state["selectedCells"]
     measurement_turn = game_state["measurementTurn"]
@@ -114,7 +141,7 @@ def process_board(game_state):
     # Invalid movement: same player must play again
     if invalid:
         return {
-            "board": board,
+            "board": original_board,
             "playerTurn": player_turn,
             "winner": get_winner(board),
             "invalid": invalid,
@@ -128,7 +155,7 @@ def process_board(game_state):
     next_measurement = (measurement_turn + 1) % 5
 
     return {
-        "board": board,
+        "board": encode_board(board),
         "playerTurn": next_turn,
         "winner": get_winner(board),
         "invalid": invalid,
