@@ -118,7 +118,7 @@ export default {
 img {
   /* text-align: center; */
   /* display: block; */
-  opacity: 0.5;
+  opacity: 1;
 }
 .selected-x {
   background:salmon;
