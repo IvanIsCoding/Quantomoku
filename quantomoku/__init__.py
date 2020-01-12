@@ -49,7 +49,7 @@ def is_full(board):
 
 
 def get_winner(board):
-    """Returns "x", "o", "tie", or None """
+    """Returns "x", "o", "tie", or "none" """
     relative_score = calculate_score(board, "x") - calculate_score(board, "o")
 
     if relative_score > 0:
@@ -61,7 +61,7 @@ def get_winner(board):
     if is_full(board):
         return "tie"
     else:
-        return None
+        return "none"
 
 
 def check_invalid(board, selected_cells, player_char):
