@@ -7,8 +7,8 @@
     <div v-if="currentPage == 4">page 4 content</div>
     <div v-if="currentPage == 5">page 5 content</div>
     <div v-if="currentPage == 6">page 6 content</div>
-    <button :disabled="currentPage == numberPages" @click="nextPage">next page</button>
-    <button :disabled="currentPage == 1" @click="previousPage">previous page</button>
+    <button class="pageNav" :disabled="currentPage == numberPages" @click="nextPage">next page</button>
+    <button class="pageNav" :disabled="currentPage == 1" @click="previousPage">previous page</button>
   </div>
 </template>
 
@@ -42,5 +42,9 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-image: url("../assets/board.png");
+}
+
+.pageNav {
+  display: inline-block;
 }
 </style>

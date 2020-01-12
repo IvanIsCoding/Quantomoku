@@ -3,7 +3,7 @@
     <div class="buttons">
       <button @click="openTutorial">tutorial</button>
       <button @click="sendDataToBackend">send data to backend</button>
-      <button @click="confirm">confirm</button>
+      <button class="active" @click="confirm">confirm</button>
       <button @click="cancel" :disabled="this.playedCells.length == 0">cancel</button>
       <BoardRenderer
         v-if="!showTutorial"
@@ -135,7 +135,8 @@ export default {
       winner: "none",
       invalid: false,
       invalidMessage: "",
-      showTutorial: false
+      showTutorial: false,
+      hover: false
     };
   },
   watch: {
@@ -173,6 +174,11 @@ html {
   margin-top: 60px;
 }
 
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
 button {
   display: block;
 
@@ -186,12 +192,11 @@ button {
   margin: 0 3px;
 }
 
-button .mouseover {
-  background: url("assets/button_2.gif") 0 -49 no-repeat;
+ button:hover {
+  background-image: url("assets/button_2.gif");
+  background-position: 0px -47px; 
+  background-repeat: no-repeat; 
 }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-}
+
 </style>
