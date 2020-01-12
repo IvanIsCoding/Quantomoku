@@ -1,14 +1,34 @@
 <template>
   <div class="main">
     TUTORIAL
-    <div class="tutorial" v-if="currentPage == 1"><img src="../assets/Tutorial/1.png"></div>
-    <div v-if="currentPage == 2">page 2 content</div>
-    <div v-if="currentPage == 3">page 3 content</div>
-    <div v-if="currentPage == 4">page 4 content</div>
-    <div v-if="currentPage == 5">page 5 content</div>
-    <div v-if="currentPage == 6">page 6 content</div>
-    <button :class="currentPage == 1? 'forceNoHoverAnimation pageNav' : 'pageNav'" :disabled="currentPage == 1" @click="previousPage">previous page</button>
-    <button :class="currentPage == numberPages? 'forceNoHoverAnimation pageNav' : 'pageNav'" :disabled="currentPage == numberPages" @click="nextPage">next page</button>
+    <div class="tutorial" v-if="currentPage == 1">
+      <img src="../assets/Tutorial/1.png" />
+    </div>
+    <div v-if="currentPage == 2">
+      <img src="../assets/Tutorial/2.png" />
+    </div>
+    <div v-if="currentPage == 3">
+      <img src="../assets/Tutorial/3.png" />
+    </div>
+    <div v-if="currentPage == 4">
+      <img src="../assets/Tutorial/4.png" />
+    </div>
+    <div v-if="currentPage == 5">
+      <img src="../assets/Tutorial/5.png" />
+    </div>
+    <div v-if="currentPage == 6">
+      <img src="../assets/Tutorial/6.png" />
+    </div>
+    <button
+      :class="currentPage == 1? 'forceNoHoverAnimation pageNav' : 'pageNav'"
+      :disabled="currentPage == 1"
+      @click="previousPage"
+    >previous page</button>
+    <button
+      :class="currentPage == numberPages? 'forceNoHoverAnimation pageNav' : 'pageNav'"
+      :disabled="currentPage == numberPages"
+      @click="nextPage"
+    >next page</button>
   </div>
 </template>
 
@@ -44,8 +64,8 @@ export default {
   background-image: url("../assets/board.png");
 }
 
-.tutorial img{
-  width:100%;
+.tutorial img {
+  width: 100%;
 }
 
 .pageNav {
