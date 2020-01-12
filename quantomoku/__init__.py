@@ -1,14 +1,13 @@
 import os
 
 try:
-    from qiskit import Aer, ClassicalRegister, execute, QuantumCircuit, QuantumRegister
-
+    from qiskit import Aer, ClassicalRegister, execute, IBMQ, QuantumCircuit, QuantumRegister
+    from qiskit.providers.ibmq import least_busy
     found_qiskit = True
 except ModuleNotFoundError:
     found_qiskit = False
 except ImportError:
     found_qiskit = False
-
 
 def decode_bitstring(bitstring):
     """Recover the Xs, Os and Ns from a bit string"""
@@ -65,8 +64,13 @@ def handle_measurement(component):
         list(reversed(range(N))),
     )
 
-    if os.getenv("IBM_Q_API_KEY"):
-        backend = Aer.get_backend("qasm_simulator")
+    if os.getenv("IBM_Q"):
+        IBMQ.load_account()
+        provider = IBMQ.get_provider(hub='ibm-q')
+        # Notice: for playability, if all quantum computers are busy
+        # We may recommend running it on an online  32-qubit simulator. Change the flag to True
+        # For allowing using a simulator
+        backend = least_busy(provider.backends(simulator=False))
     else:
         backend = Aer.get_backend("qasm_simulator")
 
