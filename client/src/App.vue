@@ -192,11 +192,9 @@ button {
   margin: 0 3px;
 }
 
- button:hover {
+button:hover {
   background-image: url("assets/button_2.gif");
-  background-position: 0px -47px; 
-  background-repeat: no-repeat; 
+  background-position: 0px -47px;
+  background-repeat: no-repeat;
 }
-
-
 </style>
