@@ -1,14 +1,17 @@
 <template>
   <div id="app">
     <div class="buttons">
+      <button @click="openTutorial">tutorial</button>
       <button @click="sendDataToBackend">send data to backend</button>
       <button @click="confirm">confirm</button>
       <button @click="cancel" :disabled="this.playedCells.length == 0">cancel</button>
       <BoardRenderer
+        v-if="!showTutorial"
         @cellClicked="cellClicked"
         :selectedCells="this.playedCells"
         :board="this.board"
       />
+      <Tutorial v-else />
     </div>
   </div>
 </template>
@@ -16,19 +19,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
 import BoardRenderer from "./components/BoardRenderer.vue";
+import Tutorial from "./components/Tutorial.vue";
 
 import io from "socket.io-client";
 
 export default {
   name: "app",
   components: {
-    BoardRenderer
+    BoardRenderer,
+    Tutorial
   },
   methods: {
     /* eslint-disable no-console */
     confirm() {
       console.log("confirm with values", this.playedCells);
       this.playedCells = [];
+    },
+    openTutorial() {
+      this.showTutorial = !this.showTutorial;
     },
     sendDataToBackend() {
       // console.log("sending", this.getDataToSendToBackend());
@@ -77,7 +85,7 @@ export default {
       for (var i = 0; i < rows; i++) {
         var row = [];
         for (var j = 0; j < columns; j++) {
-          row.push({ id: i + "," + j, value: "n" });
+          row.push({ id: i + "," + j, value: "q_3" });
         }
         result.push(row);
       }
@@ -120,7 +128,8 @@ export default {
       measurementTurn: 0,
       winner: "none",
       invalid: false,
-      invalidMessage: ""
+      invalidMessage: "",
+      showTutorial: false
     };
   },
   watch: {
