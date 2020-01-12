@@ -104,10 +104,33 @@ def check_invalid(board, selected_cells, player_char):
 def update_board(board, selected_cells, player_char):
     if len(selected_cells) == 1:
         x, y = selected_cells[0]  # classical move
-        board[x][y] = player_char
+        component = get_max_component(board)
+        board[x][y] = player_char + "_{}".format(component)
     else:
-        """Not implemented yet"""
-        pass
+        x0, y0 = selected_cells[0]
+        x1, y1 = selected_cells[1]
+
+        if board[x1][y1] == "n":
+            """x0 and y0 must always be "n" if possible"""
+            x0, x1 = x1, x0
+            y0, y1 = y1, y0
+
+        if board[x0][y0] == "n" and board[x1][y1] == "n":
+            """Superposition case"""
+            cell_symbol = ">"  # superposition for x
+            
+            if player_char == "o":
+                cell_symbol = "("  # superposition for o
+
+            component = get_max_component(board)
+            board[x0][y0] = "{}_{}".format(cell_symbol, component)
+            board[x1][y1] = "{}_{}".format(cell_symbol, component)
+        elif board[x1][y1][0] == "x" or board[x1][y1][0] == "o":
+            """Simple entanglement case"""
+            component = int(board[x1][y1].split("_")[-1])
+            board[x0][y0] = "q_{}".format(component)
+            board[x1][y1] = "q_{}".format(component)
+
 
 
 def process_board(game_state):
