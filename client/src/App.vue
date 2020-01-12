@@ -22,6 +22,12 @@ import BoardRenderer from "./components/BoardRenderer.vue";
 import Tutorial from "./components/Tutorial.vue";
 
 import io from "socket.io-client";
+var socket = io("http://localhost:8000");
+
+socket.on("message", function(data) {
+  console.log(data);
+  // this.receiveNewDataFromBackend(data);
+});
 
 export default {
   name: "app",
@@ -39,13 +45,7 @@ export default {
       this.showTutorial = !this.showTutorial;
     },
     sendDataToBackend() {
-      console.log("sending", this.getDataToSendToBackend());
-      const socket = io("http://localhost:8000");
       socket.emit("message", this.getDataToSendToBackend());
-      socket.on("message", function(data) {
-        console.log(data);
-        // this.receiveNewDataFromBackend(data);
-      });
     },
     cancel() {
       this.playedCells = [];
