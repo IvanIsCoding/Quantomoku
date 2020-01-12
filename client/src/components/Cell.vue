@@ -61,6 +61,7 @@ export default {
 
 <style scoped>
 .board-cell {
+  padding:1px;
   max-width: 40px;
   max-height: 40px;
 }

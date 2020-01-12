@@ -130,7 +130,6 @@ export default {
       invalid: false,
       invalidMessage: "",
       showTutorial: false,
-      hover: false
     };
   },
   watch: {
