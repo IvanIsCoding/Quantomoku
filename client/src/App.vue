@@ -4,12 +4,8 @@
     <button @click="sendDataToBackend">send data to backend</button>
     <button @click="confirm">confirm</button>
     <button @click="cancel" :disabled="this.playedCells.length == 0">cancel</button>
-<<<<<<< Updated upstream
-    <Board @cellClicked="cellClicked" />
-=======
     </div>
     <Board @cellClicked="cellClicked" :selectedCells="this.playedCells" />
->>>>>>> Stashed changes
   </div>
 </template>
 
