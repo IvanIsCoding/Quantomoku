@@ -7,6 +7,7 @@
           :id="cell.id"
           :selected="cell.id == selectedCells[0] || cell.id == selectedCells[1]"
           :value="cell.value"
+          :playerTurn="playerTurn"
         />
       </div>
     </div>
@@ -23,7 +24,8 @@ export default {
   },
   props: {
     selectedCells: Array,
-    board: Array
+    board: Array, 
+    playerTurn: String
   },
   methods: {
     cellClicked(id) {

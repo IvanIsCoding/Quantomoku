@@ -18,6 +18,7 @@
       @cellClicked="cellClicked"
       :selectedCells="this.playedCells"
       :board="this.board"
+      :playerTurn="playerTurn"
     />
     <Tutorial v-else />
     <div class="buttons">

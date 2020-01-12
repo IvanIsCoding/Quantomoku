@@ -5,7 +5,7 @@
       width="45px"
       height="45px"
       @click="clicked"
-      :class="this.selected? 'selected-x' : '' + (this.collapsed? ' collapsed' : '')"
+      :class="cssClasses"
     />
     <!-- <span style="margin-right: 10px; font-size:5px">{{id}}</span> -->
   </div>
@@ -17,7 +17,8 @@ export default {
   props: {
     id: String,
     selected: Boolean,
-    value: String
+    value: String,
+    playerTurn: String
   },
   methods: {
     clicked() {
@@ -25,6 +26,16 @@ export default {
     }
   },
   computed: {
+    cssClasses() {
+      var result = "";
+      if (this.selected) {
+        result += "selected-" + this.playerTurn;
+      }
+      if (this.collapsed) {
+        result += " collapsed";
+      }
+      return result;
+    },
     assetPath() {
       var result = "P1";
       switch (this.value) {
@@ -121,11 +132,11 @@ img {
   opacity: 0.5;
 }
 .selected-x {
-  background:salmon;
+  background: salmon;
   opacity: 1;
 }
 .selected-o {
-  background: skyblue; 
+  background: skyblue;
   opacity: 1;
 }
 .collapsed {
