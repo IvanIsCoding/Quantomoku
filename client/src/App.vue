@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div  class="buttons" >
-      <div v-if="!showTutorial" class="player-turn"><img class="player-hl" src="./assets/P1.png" width="45px" height="45px"></div>
+      <div v-if="!showTutorial" class="player-turn pt-x"><img class="player-hl" src="./assets/P1.png" width="45px" height="45px"></div>
     <button v-if="!showTutorial" @click="openTutorial">Tutorial</button>
-    <div v-if="!showTutorial" class="player-turn"><img class="player-hl" src="./assets/P2.png" width="45px" height="45px"></div>
+    <div v-if="!showTutorial" class="player-turn pt-o"><img class="player-hl" src="./assets/P2.png" width="45px" height="45px"></div>
     <button v-if="showTutorial" @click="openTutorial">Play Game</button>
     </div>
     Turns left before automatic measurement: {{5 - measurementTurn}}
@@ -220,6 +220,14 @@ button {
   max-height: 45px;
   padding:2px;
   opacity: 0.25;
+}
+
+.pt-x{
+  background: salmon;
+}
+
+.pt-o{
+  background: skyblue;
 }
 
 .pt-active {
