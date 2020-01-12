@@ -1,29 +1,26 @@
 <template>
   <div id="app">
-    <div  class="buttons" >
-    <button v-if="!showTutorial" @click="openTutorial">Tutorial</button>
-    <button v-if="showTutorial" @click="openTutorial">Play Game</button>
+    <div class="buttons">
+      <button v-if="!showTutorial" @click="openTutorial">Tutorial</button>
+      <button v-if="showTutorial" @click="openTutorial">Play Game</button>
     </div>
     Turns left before automatic measurement: {{5 - measurementTurn}}
-    
     <div v-if="measurementTurn == 5">Measured at this turn</div>
-    
+
     <BoardRenderer
-        v-if="!showTutorial"
-        @cellClicked="cellClicked"
-        :selectedCells="this.playedCells"
-        :board="this.board"
-      />
-      <Tutorial v-else />
-      <div class="buttons">
-      
-      <button class="active" @click="sendDataToBackend">Confirm</button>
+      v-if="!showTutorial"
+      @cellClicked="cellClicked"
+      :selectedCells="this.playedCells"
+      :board="this.board"
+    />
+    <Tutorial v-else />
+    <div class="buttons">
+      <button :disabled="showTutorial" @click="sendDataToBackend" :class="showTutorial? 'forceNoHoverAnimation': ''">Confirm</button>
       <button
         @click="cancel"
         :disabled="this.playedCells.length == 0"
         :class="this.playedCells.length == 0? 'forceNoHoverAnimation': ''"
       >Cancel</button>
-      
     </div>
   </div>
 </template>
@@ -53,7 +50,7 @@ export default {
     openTutorial() {
       this.showTutorial = !this.showTutorial;
     },
-    
+
     sendDataToBackend() {
       socket.emit("message", this.getDataToSendToBackend());
     },
@@ -152,7 +149,7 @@ export default {
       winner: "none",
       invalid: false,
       invalidMessage: "",
-      showTutorial: false,
+      showTutorial: false
     };
   },
   watch: {
@@ -175,18 +172,17 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Sniglet&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Sniglet&display=swap");
 
 html {
   background-image: url("assets/bg.png");
   background-size: cover;
   background-repeat: no-repeat;
-
 }
 
 #app {
-    font-family: 'Sniglet', sans-serif;
-    font-size: 16pt;
+  font-family: "Sniglet", sans-serif;
+  font-size: 16pt;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -201,7 +197,6 @@ html {
   align-items: center;
 }
 
-
 button {
   display: block;
 
@@ -214,8 +209,7 @@ button {
   margin: 0 3px;
 
   font-size: 15pt;
-    font-family: 'Sniglet', sans-serif;
-
+  font-family: "Sniglet", sans-serif;
 }
 
 button:hover {
