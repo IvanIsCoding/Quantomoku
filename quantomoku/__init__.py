@@ -68,9 +68,13 @@ def handle_measurement(component):
         IBMQ.load_account()
         provider = IBMQ.get_provider(hub='ibm-q')
         # Notice: for playability, if all quantum computers are busy
-        # We may recommend running it on an online  32-qubit simulator. Change the flag to True
+        # We may recommend running it on an online  32-qubit simulator. Change the simulator flag to True
         # For allowing using a simulator
-        backend = least_busy(provider.backends(simulator=False))
+        backend = least_busy(
+            provider.backends(
+                filters=lambda x: x.configuration().n_qubits >= N and x.configuration().simulator == False
+            )
+        )
     else:
         backend = Aer.get_backend("qasm_simulator")
 
