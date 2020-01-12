@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     TUTORIAL
-    <div v-if="currentPage == 1">page 1 content</div>
+    <div class="tutorial" v-if="currentPage == 1"><img src="../assets/Tutorial/1.png"></div>
     <div v-if="currentPage == 2">page 2 content</div>
     <div v-if="currentPage == 3">page 3 content</div>
     <div v-if="currentPage == 4">page 4 content</div>
@@ -42,6 +42,10 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-image: url("../assets/board.png");
+}
+
+.tutorial img{
+  width:100%;
 }
 
 .pageNav {

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div  class="buttons" >
-    <button @click="openTutorial">Tutorial</button></div>
+    <button v-if="!showTutorial" @click="openTutorial">Tutorial</button>
+    <button v-if="showTutorial" @click="openTutorial">Play Game</button>
+    </div>
     Turns left before automatic measurement: {{5 - measurementTurn}}
     
     <div v-if="measurementTurn == 5">Measured at this turn</div>
@@ -51,6 +53,7 @@ export default {
     openTutorial() {
       this.showTutorial = !this.showTutorial;
     },
+    
     sendDataToBackend() {
       socket.emit("message", this.getDataToSendToBackend());
     },
