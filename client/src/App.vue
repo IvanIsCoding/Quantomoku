@@ -1,14 +1,15 @@
 <template>
   <div id="app">
     <div class="buttons">
-    <button @click="sendDataToBackend">send data to backend</button>
-    <button @click="confirm">confirm</button>
-    <button @click="cancel" :disabled="this.playedCells.length == 0">cancel</button>
-    <BoardRenderer
-      @cellClicked="cellClicked"
-      :selectedCells="this.playedCells"
-      :board="this.board"
-    />
+      <button @click="sendDataToBackend">send data to backend</button>
+      <button @click="confirm">confirm</button>
+      <button @click="cancel" :disabled="this.playedCells.length == 0">cancel</button>
+      <BoardRenderer
+        @cellClicked="cellClicked"
+        :selectedCells="this.playedCells"
+        :board="this.board"
+      />
+    </div>
   </div>
 </template>
 
@@ -124,18 +125,18 @@ button {
   width: 219px;
   height: 47px;
 
-  background: url('assets/button_2.gif') 0 0 no-repeat; 
+  background: url("assets/button_2.gif") 0 0 no-repeat;
 
-  border-style: none; 
-  font-family:  sans-serif;
+  border-style: none;
+  font-family: sans-serif;
   margin: 0 3px;
 }
 
-button .mouseover{
-  background: url('assets/button_2.gif') 0 -49 no-repeat;
+button .mouseover {
+  background: url("assets/button_2.gif") 0 -49 no-repeat;
 }
 
-.buttons{
+.buttons {
   display: flex;
   justify-content: center;
 }
