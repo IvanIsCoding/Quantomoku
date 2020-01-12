@@ -3,6 +3,8 @@ try:
     found_qiskit = True
 except ModuleNotFoundError:
     found_qiskit = False
+except ImportError:
+    found_qiskit = False
 
 def calculate_score(board_matrix, player_char):
     """Calculate how many five line-ups there are in a board for a given player"""
