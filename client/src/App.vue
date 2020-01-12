@@ -85,7 +85,7 @@ export default {
       for (var i = 0; i < rows; i++) {
         var row = [];
         for (var j = 0; j < columns; j++) {
-          row.push({ id: i + "," + j, value: "q_3" });
+          row.push({ id: i + "," + j, value: "n" });
         }
         result.push(row);
       }
