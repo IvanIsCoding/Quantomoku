@@ -43,6 +43,7 @@ export default {
   display: block;
   margin: auto;
   background-image: url("../assets/board.png");
+  
 }
 
 .boardRow {
