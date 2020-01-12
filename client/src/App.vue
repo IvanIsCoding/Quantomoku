@@ -71,4 +71,12 @@ html {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+button {
+  background-color: bisque;
+  border-style: dashed;
+  border-color: black;
+  border-radius: 15px;
+  font-family: 'Times New Roman', Times, serif;
+}
 </style>
