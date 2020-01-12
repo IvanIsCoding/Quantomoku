@@ -6,6 +6,9 @@
 </template>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
+var myObject = {
+    message: 'Hello World!'
+}
 //const socket = io("http://localhost:8000");
 import io from "socket.io-client"
 export default {
@@ -13,17 +16,15 @@ export default {
   props: {
     msg: String
   },
+  
   methods: {
     devina: function() {
       const socket = io("http://localhost:8000");
       alert("devina function called");
-      socket.emit("message", "HELLO WORLD");
+      socket.emit("message", myObject);
       socket.on("message", function(data) {
       console.log(data);
       });
-    }, 
-    myFun(fdsfds) {
-      
     }
   }
 };
