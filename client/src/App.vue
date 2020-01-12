@@ -1,16 +1,12 @@
 <template>
   <div id="app">
-    turns left before automatic measurement: {{5 - measurementTurn}}
-    <div v-if="measurementTurn == 5">measured at this turn</div>
-    <div class="buttons">
-      <button @click="openTutorial">tutorial</button>
-      <button class="active" @click="sendDataToBackend">confirm</button>
-      <button
-        @click="cancel"
-        :disabled="this.playedCells.length == 0"
-        :class="this.playedCells.length == 0? 'forceNoHoverAnimation': ''"
-      >cancel</button>
-      <BoardRenderer
+    <div  class="buttons" >
+    <button @click="openTutorial">Tutorial</button></div>
+    Turns left before automatic measurement: {{4 - measurementTurn}}
+    
+    <div v-if="measurementTurn == 4">Measured at this turn</div>
+    
+    <BoardRenderer
         v-if="!showTutorial"
         @cellClicked="cellClicked"
         :selectedCells="this.playedCells"
