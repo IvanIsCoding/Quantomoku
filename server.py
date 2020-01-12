@@ -15,7 +15,7 @@ async def print_message(sid, message):
     stuff= process_board(message)
     print("Stuff {}".format(stuff))
     #do things with stuff
-    await sio.emit('message', message)
+    await sio.emit('message', stuff)
 
 # We bind our aiohttp endpoint to our app
 # router
