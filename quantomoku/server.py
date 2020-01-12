@@ -1,6 +1,6 @@
 from aiohttp import web
 import socketio
-
+from __init__ import process_board
 sio = socketio.AsyncServer(cors_allowed_origins="*")
 app = web.Application()
 sio.attach(app)
@@ -12,7 +12,9 @@ async def print_message(sid, message):
     # we print the socket ID and the message
     print("Socket ID: " , sid)
     print(message)
-    await sio.emit('message', message)
+    stuff= process_board(message)
+    #do things with stuff
+    await sio.emit('message', stuff)
 
 # We bind our aiohttp endpoint to our app
 # router

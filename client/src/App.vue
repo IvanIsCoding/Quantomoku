@@ -28,7 +28,10 @@ export default {
       const socket = io("http://localhost:8000");
       alert("sending data to backend");
       var myObject = {
-        message: "Hello World!"
+         "board":"",
+         "player_turn":"",
+         "selected_cells":"",
+         "measurement_turn":""
       };
       socket.emit("message", myObject);
       socket.on("message", function(data) {
