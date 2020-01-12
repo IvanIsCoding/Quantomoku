@@ -1,5 +1,5 @@
 <template>
-  <div class="board-cell">
+  <div class="board-cell" width="20px" height="20px">
     <img
       :src="require( `../assets/${this.assetPath}`)"
       width="40px"
@@ -61,7 +61,9 @@ export default {
 
 <style scoped>
 .board-cell {
-  padding:1px;
+  background: rgba(255, 164, 80, 0.2);
+  
+  margin:1.5px;
   max-width: 40px;
   max-height: 40px;
 }
