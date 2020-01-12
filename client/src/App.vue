@@ -29,16 +29,12 @@ export default {
       this.playedCells = [];
     },
     sendDataToBackend() {
-      // const socket = io("http://localhost:8000");
-      // alert("sending data to backend");
-      // var myObject = {
-      //   message: "Hello World!"
-      // };
-      // socket.emit("message", myObject);
-      // socket.on("message", function(data) {
-      //   console.log(data);
-      // });
-      console.log(this.getDataToSendToBackend());
+      // console.log("sending", this.getDataToSendToBackend());
+      const socket = io("http://localhost:8000");
+      socket.emit("message", this.getDataToSendToBackend());
+      socket.on("message", function(data) {
+        console.log(data);
+      });
     },
     cancel() {
       this.playedCells = [];
@@ -126,6 +122,6 @@ button {
   border-style: dashed;
   border-color: black;
   border-radius: 15px;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
 }
 </style>
