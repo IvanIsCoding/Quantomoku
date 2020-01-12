@@ -28,7 +28,7 @@ export default {
       const socket = io("http://localhost:8000");
       alert("sending data to backend");
       var myObject = {
-         "board":"",
+         "board":[[]],
          "player_turn":"",
          "selected_cells":"",
          "measurement_turn":""
