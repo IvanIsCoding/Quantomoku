@@ -109,9 +109,9 @@ export default {
 <style scoped>
 .board-cell {
   background: rgba(255, 164, 80, 0.2);
-  
+
   padding: 2px;
-  margin:1.5px;
+  margin: 1.5px;
   max-width: 45px;
   max-height: 45px;
 }
@@ -120,7 +120,10 @@ img {
   /* display: block; */
   opacity: 0.5;
 }
-.selected {
+.selected-x {
+  opacity: 1;
+}
+.selected-o {
   opacity: 1;
 }
 .collapsed {
