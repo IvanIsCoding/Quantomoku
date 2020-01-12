@@ -1,10 +1,10 @@
 <template>
   <!-- <div class="hello">Our cool QuantumOku</div> -->
-  <div>
-    <div v-for="line in cells" :key="line[0]">
-      <span v-for="cell in line" :key="cell">
+  <div class="main">
+    <div v-for="line in cells" :key="line[0]" class="boardRow">
+      <div v-for="cell in line" :key="cell" class="boardCell">
         <Cell />
-      </span>
+      </div>
     </div>
   </div>
 </template>
@@ -41,3 +41,11 @@ export default {
   }
 };
 </script>
+
+<style>
+
+.boardRow {
+  display: flex;
+}
+
+</style>

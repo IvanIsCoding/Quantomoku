@@ -1,7 +1,7 @@
 <template>
-  <span>
+  <div class="board-cell">
     <img src="../assets/cell.png" width="20px" height="20px" />
-  </span>
+  </div>
 </template>
 
 <script>
@@ -14,8 +14,14 @@ export default {
 </script>
 
 <style scoped>
+.board-cell{
+  background: red;
+  max-width: 20px;
+  max-height: 20px;
+  
+}
 img {
-  text-align: center;
-  display: block;
+  /* text-align: center; */
+  /* display: block; */
 }
 </style>
