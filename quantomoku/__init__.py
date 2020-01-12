@@ -23,6 +23,12 @@ def decode_bitstring(bitstring):
 
     return answer
 
+def get_circuit_result(backend, circuit):
+    """Given a circuit, executes it one time and gets the measurement"""
+    job = execute(circuit, backend=backend, shots=1)
+    result = job.result()
+    counts = result.get_counts()
+    return list(counts.keys())[0]    
 
 def handle_measurement(component):
     """Given a component, return the measurements for it"""
@@ -30,23 +36,46 @@ def handle_measurement(component):
 
     symbol_case = [x[0] for x in sorted_symbols]
 
-    answer_symbols = ["n" for i in range(len(component))]
+    N = len(component) * 2
 
+    circuit = QuantumCircuit(QuantumRegister(N), ClassicalRegister(N))
+
+    # Discover which circuit to build
     if symbol_case == ["x"]:
-        pass
+        circuit.x(0)
     elif symbol_case == ["o"]:
-        pass
+        circuit.x(1)
     elif symbol_case == ["q", "q"]:
-        pass
+        circuit.h(0)
+        circuit.x(1)
+        circuit.cx(0, 1)
+        circuit.cx(0, 3)
+        circuit.cx(1, 2)
     elif symbol_case == [">", ">"]:
-        pass
+        circuit.h(0)
+        circuit.x(2)
+        circuit.cx(0, 2)
     elif symbol_case == ["(", "("]:
-        pass
+        circuit.h(1)
+        circuit.x(3)
+        circuit.cx(1, 3)
+
+    circuit.measure(
+        list(range(N)),
+        list(reversed(range(N))),
+    )
 
     if os.getenv("IBM_Q_API_KEY"):
-        pass
+        backend = Aer.get_backend("qasm_simulator")
     else:
         backend = Aer.get_backend("qasm_simulator")
+
+    # answer_symbols = ["n" for i in range(len(component))]
+    answer_symbols = decode_bitstring(
+        get_circuit_result(backend, circuit)
+    )
+
+    print("BEFORE {}\nAFTER {}".format(symbol_case, answer_symbols))
 
     for index, symbol_answer in enumerate(answer_symbols):
         print("{} -> {}".format(sorted_symbols[index][0], symbol_answer))
