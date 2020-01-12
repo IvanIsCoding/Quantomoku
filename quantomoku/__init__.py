@@ -76,6 +76,16 @@ def check_invalid(board, selected_cells, player_char):
         if board_matrix[x][y] in ["o", "x"]:
             return (True, "Measured cells cannot be selected!")
 
+    # Check if trying to entangle with cell of the same type
+    for x, y in selected_cells:
+        if "_" in board_matrix[x][y] and board_matrix[x][y][0] == player_char:
+            return (True, "You cannot entangle with your own lonely cell!")
+
+    # Check if trying to entangle with entangled cell
+    for x, y in selected_cells:
+        if board_matrix[x][y][0] == "q":
+            return (True, "You cannot entangle with the entangled cell!")
+
     return (False, "")
 
 
