@@ -29,7 +29,7 @@ export default {
       var result = "P1";
       switch (this.value) {
         case "n":
-          result = "none.png";
+          result = "neutral.png";
           break;
         case "x":
           result = "P1.png";
