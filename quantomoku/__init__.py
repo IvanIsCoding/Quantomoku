@@ -64,6 +64,18 @@ def get_winner(board):
         return "none"
 
 
+def get_max_component(board):
+    """Return the number for the next cell_{component}"""
+    max_comp = 0
+    for row in board:
+        for cell in row:
+            if "_" in cell:
+                cell_comp = int(cell.split("_")[-1])
+                if cell_comp + 1 >= max_comp:
+                    max_comp = cell_comp + 1
+    return max_comp
+
+
 def check_invalid(board, selected_cells, player_char):
     """Return if a move is invalid, and give appropriate error message"""
     if len(selected_cells) == 0:
