@@ -230,6 +230,14 @@ button {
   opacity: 0.25;
 }
 
+.pt-x{
+  background: salmon;
+}
+
+.pt-o{
+  background: skyblue;
+}
+
 .pt-active {
   opacity: 1;
 }

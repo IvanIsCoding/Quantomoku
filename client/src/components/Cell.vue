@@ -121,9 +121,11 @@ img {
   opacity: 0.5;
 }
 .selected-x {
+  background:salmon;
   opacity: 1;
 }
 .selected-o {
+  background: skyblue; 
   opacity: 1;
 }
 .collapsed {
