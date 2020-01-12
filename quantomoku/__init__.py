@@ -17,7 +17,7 @@ def decode_bitstring(bitstring):
 
     answer = []
 
-    for i in range(len(bitstring), 2):
+    for i in range(0, len(bitstring), 2):
         bit_pair = bitstring[i] + bitstring[i + 1]
         answer.append(conversion[bit_pair])
 
@@ -70,15 +70,12 @@ def handle_measurement(component):
     else:
         backend = Aer.get_backend("qasm_simulator")
 
-    # answer_symbols = ["n" for i in range(len(component))]
+    bitstring = get_circuit_result(backend, circuit)
     answer_symbols = decode_bitstring(
-        get_circuit_result(backend, circuit)
+        bitstring
     )
 
-    print("BEFORE {}\nAFTER {}".format(symbol_case, answer_symbols))
-
     for index, symbol_answer in enumerate(answer_symbols):
-        print("{} -> {}".format(sorted_symbols[index][0], symbol_answer))
         sorted_symbols[index][0] = symbol_answer
 
     return sorted_symbols
