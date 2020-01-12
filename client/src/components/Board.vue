@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div v-for="line in cells" :key="'line' + line[0]" class="boardRow">
+    <div v-for="line in cells" :key="'line' + line[0].id" class="boardRow">
       <div v-for="cell in line" :key="cell.id" class="boardCell">
         <Cell
           :id="cell.id"
@@ -24,7 +24,7 @@ export default {
     selectedCells: Array
   },
   methods: {
-    make2dArray(rows, columns) {
+    makeBoard(rows, columns) {
       var result = [];
       for (var i = 0; i < rows; i++) {
         var row = [];
@@ -33,8 +33,15 @@ export default {
         }
         result.push(row);
       }
-      // print2dArray(result);
+      this.print2dArray(result);
       return result;
+    },
+    print2dArray(matrix) {
+      for (var i = 0; i < matrix.length; i++) {
+        for (var j = 0; j < matrix[i].length; j++) {
+          console.log(matrix[i][j]);
+        }
+      }
     },
     cellClicked(id) {
       this.$emit("cellClicked", id);
@@ -42,7 +49,7 @@ export default {
   },
   data() {
     return {
-      cells: this.make2dArray(5, 5)
+      cells: this.makeBoard(19, 19)
     };
   }
 };
