@@ -1,9 +1,9 @@
 <template>
-  <div class="board-cell" width="20px" height="20px">
+  <div class="board-cell">
     <img
       :src="require( `../assets/${this.assetPath}`)"
-      width="40px"
-      height="40px"
+      width="45px"
+      height="45px"
       @click="clicked"
       :class="this.selected? 'selected' : '' + (this.collapsed? ' collapsed' : '')"
     />
@@ -96,9 +96,10 @@ export default {
 .board-cell {
   background: rgba(255, 164, 80, 0.2);
   
+  padding: 2px;
   margin:1.5px;
-  max-width: 40px;
-  max-height: 40px;
+  max-width: 45px;
+  max-height: 45px;
 }
 img {
   /* text-align: center; */
