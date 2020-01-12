@@ -33,7 +33,7 @@ export default {
         }
         result.push(row);
       }
-      print2dArray(result);
+      // print2dArray(result);
       return result;
     },
     cellClicked(id) {
