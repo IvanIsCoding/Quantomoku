@@ -5,7 +5,7 @@
       width="45px"
       height="45px"
       @click="clicked"
-      :class="this.selected? 'selected' : '' + (this.collapsed? ' collapsed' : '')"
+      :class="this.selected? 'selected-x' : '' + (this.collapsed? ' collapsed' : '')"
     />
     <!-- <span style="margin-right: 10px; font-size:5px">{{id}}</span> -->
   </div>
