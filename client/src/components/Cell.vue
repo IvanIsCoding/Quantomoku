@@ -8,11 +8,11 @@
 export default {
   name: "Cell",
   props: {
-    id: String
+    id: Number
   },
   methods: {
     clicked() {
-      alert(this.id);
+      this.$emit("cellClicked", this.id);
     }
   }
 };

@@ -1,9 +1,8 @@
 <template>
-  <!-- <div class="hello">Our cool QuantumOku</div> -->
   <div class="main">
     <div v-for="line in cells" :key="'line' + line[0]" class="boardRow">
       <div v-for="cell in line" :key="cell.id" class="boardCell">
-        <Cell :id="cell.id" />
+        <Cell :id="cell.id" @cellClicked="cellClicked" />
       </div>
     </div>
   </div>
@@ -30,6 +29,9 @@ export default {
         arr.push(innerArray);
       }
       return arr;
+    },
+    cellClicked(id) {
+      this.$emit("cellClicked", id);
     }
   },
   data() {
