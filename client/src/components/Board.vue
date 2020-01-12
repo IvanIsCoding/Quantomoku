@@ -1,9 +1,9 @@
 <template>
   <!-- <div class="hello">Our cool QuantumOku</div> -->
   <div class="main">
-    <div v-for="line in cells" :key="line[0]" class="boardRow">
-      <div v-for="cell in line" :key="cell" class="boardCell">
-        <Cell />
+    <div v-for="line in cells" :key="'line' + line[0]" class="boardRow">
+      <div v-for="cell in line" :key="cell.id" class="boardCell">
+        <Cell :id="cell.id" />
       </div>
     </div>
   </div>
@@ -14,9 +14,6 @@ import Cell from "./Cell.vue";
 
 export default {
   name: "Board",
-  props: {
-    msg: String
-  },
   components: {
     Cell
   },
@@ -25,9 +22,10 @@ export default {
       var count = 0;
       var arr = [];
       for (let i = 0; i < d2; i++) {
-        var innerArray = [count++];
+        var innerArray = [];
         for (let j = 0; j < d1; j++) {
-          innerArray.push(count++);
+          var myId = count++;
+          innerArray.push({ id: myId });
         }
         arr.push(innerArray);
       }
@@ -36,28 +34,26 @@ export default {
   },
   data() {
     return {
-      cells: this.make2dArray(18, 19)
+      cells: this.make2dArray(19, 19)
     };
   }
 };
 </script>
 
 <style>
-.main{
+.main {
   width: 760px;
   display: block;
   margin: auto;
   padding: 20px;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;   
-  background-image: url('../assets/board.png');
-
+  background-position: center;
+  background-image: url("../assets/board.png");
 }
 
 .boardRow {
   display: table-cell;
   justify-content: center;
 }
-
 </style>

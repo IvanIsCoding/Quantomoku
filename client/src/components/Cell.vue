@@ -1,6 +1,6 @@
 <template>
   <div class="board-cell">
-    <img src="../assets/P1.png" width="40px" height="40px" />
+    <img src="../assets/P1.png" width="40px" height="40px" @click="clicked" />
   </div>
 </template>
 
@@ -8,17 +8,20 @@
 export default {
   name: "Cell",
   props: {
-    msg: String
+    id: String
+  },
+  methods: {
+    clicked() {
+      alert(this.id);
+    }
   }
 };
 </script>
 
 <style scoped>
-.board-cell{
-  
+.board-cell {
   max-width: 40px;
   max-height: 40px;
-  
 }
 img {
   /* text-align: center; */
