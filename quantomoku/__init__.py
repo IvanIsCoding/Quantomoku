@@ -1,14 +1,59 @@
+import os
+
 try:
     from qiskit import Aer, ClassicalRegister, execute, QuantumCircuit, QuantumRegister
+
     found_qiskit = True
 except ModuleNotFoundError:
     found_qiskit = False
 except ImportError:
     found_qiskit = False
 
+
+def decode_bitstring(bitstring):
+    """Recover the Xs, Os and Ns from a bit string"""
+
+    conversion = {"00": "n", "10": "x", "01": "o", "11": "n"}
+
+    answer = []
+
+    for i in range(len(bitstring), 2):
+        bit_pair = bitstring[i] + bitstring[i + 1]
+        answer.append(conversion[bit_pair])
+
+    return answer
+
+
 def handle_measurement(component):
     """Given a component, return the measurements for it"""
-    return None  # not implemented yet 
+    sorted_symbols = sorted(component)
+
+    symbol_case = [x[0] for x in sorted_symbols]
+
+    answer_symbols = ["n" for i in range(len(component))]
+
+    if symbol_case == ["x"]:
+        pass
+    elif symbol_case == ["o"]:
+        pass
+    elif symbol_case == ["q", "q"]:
+        pass
+    elif symbol_case == [">", ">"]:
+        pass
+    elif symbol_case == ["(", "("]:
+        pass
+
+    if os.getenv("IBM_Q_API_KEY"):
+        pass
+    else:
+        backend = Aer.get_backend("qasm_simulator")
+
+    for index, symbol_answer in enumerate(answer_symbols):
+        print("{} -> {}".format(sorted_symbols[index][0], symbol_answer))
+        sorted_symbols[index][0] = symbol_answer
+
+    return sorted_symbols
+
 
 def global_measurement(board):
     """Collapse all states"""
@@ -23,15 +68,16 @@ def global_measurement(board):
             if "_" in cell:
                 cell_type, cell_component = cell.split("_")
                 cell_component = int(cell_component)
-                components[cell_component].append(
-                    (cell_type, row_nuber, col_number)
-                )
+                components[cell_component].append([cell_type, row_nuber, col_number])
 
     for component in components:
         if len(component) == 0:
             continue  # empty component, nothing to do
         measurement_result = handle_measurement(component)
-
+        for cell_tuple in measurement_result:
+            row_number = cell_tuple[1]
+            col_number = cell_tuple[2]
+            board[row_number][col_number] = cell_tuple[0]
 
 
 def calculate_score(board_matrix, player_char):
@@ -152,7 +198,7 @@ def update_board(board, selected_cells, player_char, measurement_turn):
         if board[x0][y0] == "n" and board[x1][y1] == "n":
             """Superposition case"""
             cell_symbol = ">"  # superposition for x
-            
+
             if player_char == "o":
                 cell_symbol = "("  # superposition for o
 
@@ -180,6 +226,7 @@ def decode_board(original_board):
 
     return board
 
+
 def encode_board(board):
     """Encode matrix into 2d matrix of JSONs format"""
 
@@ -188,13 +235,12 @@ def encode_board(board):
     for row_number, row in enumerate(board):
         json_board.append([])
         for col_number, cell in enumerate(row):
-            json_board[-1].append({
-                    "id": "{},{}".format(row_number, col_number),
-                    "value": cell,
-                }
+            json_board[-1].append(
+                {"id": "{},{}".format(row_number, col_number), "value": cell}
             )
 
     return json_board
+
 
 def process_board(game_state):
     """Given a dictionary of the game_state containing the keys:
@@ -236,7 +282,6 @@ def process_board(game_state):
     next_measurement = (measurement_turn + 1) % 5
 
     update_board(board, selected_cells, player_turn, next_measurement)  #  do movement
-
 
     return {
         "board": encode_board(board),
