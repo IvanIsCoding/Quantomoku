@@ -1,0 +1,46 @@
+<template>
+  <div class="main">
+    TUTORIAL
+    <div v-if="currentPage == 1">page 1 content</div>
+    <div v-if="currentPage == 2">page 2 content</div>
+    <div v-if="currentPage == 3">page 3 content</div>
+    <div v-if="currentPage == 4">page 4 content</div>
+    <div v-if="currentPage == 5">page 5 content</div>
+    <div v-if="currentPage == 6">page 6 content</div>
+    <button :disabled="currentPage == numberPages" @click="nextPage">next page</button>
+    <button :disabled="currentPage == 1" @click="previousPage">previous page</button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Tutorial",
+  data() {
+    return {
+      currentPage: 1,
+      numberPages: 6
+    };
+  },
+  methods: {
+    nextPage() {
+      this.currentPage++;
+    },
+    previousPage() {
+      this.currentPage--;
+    }
+  }
+};
+</script>
+
+<style scoped>
+.main {
+  width: 760px;
+  display: block;
+  margin: auto;
+  padding: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("../assets/board.png");
+}
+</style>
