@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.4.4",
+    "socket.io": "^2.3.0",
+    "uws": "^10.148.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
