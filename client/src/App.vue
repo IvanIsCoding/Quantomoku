@@ -3,7 +3,7 @@
     <button @click="sendDataToBackend">send data to backend</button>
     <button @click="confirm">confirm</button>
     <button @click="cancel" :disabled="this.playedCells.length == 0">cancel</button>
-    <Board @cellClicked="cellClicked" />
+    <Board @cellClicked="cellClicked" :selectedCells="this.playedCells" />
   </div>
 </template>
 
@@ -39,18 +39,21 @@ export default {
       this.playedCells = [];
     },
     cellClicked(id) {
-      if (this.playedCells.length < 2) {
-        this.playedCells.push(id);
-      } else {
-        alert(
-          "You can't play more than 2 cells. Click cancel to play other cells."
-        );
+      if (!this.playedCells.includes(id)) {
+        if (this.playedCells.length < 2) {
+          this.playedCells.push(id);
+        } else {
+          alert(
+            "You can't play more than 2 cells. Click cancel to play other cells."
+          );
+        }
       }
     }
   },
   data() {
     return {
-      playedCells: []
+      playedCells: [],
+      selectedCells: []
     };
   }
 };

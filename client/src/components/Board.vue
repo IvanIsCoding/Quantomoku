@@ -33,13 +33,8 @@ export default {
         }
         result.push(row);
       }
-      print2dArray(result);
+      // print2dArray(result);
       return result;
-    },
-    print2dArray(matrix) {
-      for(var i = 0; i < matrix.length; i++) {
-        for(var j = 0; < )
-      }
     },
     cellClicked(id) {
       this.$emit("cellClicked", id);
