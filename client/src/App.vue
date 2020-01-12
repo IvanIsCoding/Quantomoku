@@ -3,20 +3,24 @@
     <button @click="sendDataToBackend">send data to backend</button>
     <button @click="confirm">confirm</button>
     <button @click="cancel" :disabled="this.playedCells.length == 0">cancel</button>
-    <Board @cellClicked="cellClicked" :selectedCells="this.playedCells" />
+    <BoardRenderer
+      @cellClicked="cellClicked"
+      :selectedCells="this.playedCells"
+      :board="this.board"
+    />
   </div>
 </template>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
-import Board from "./components/Board.vue";
+import BoardRenderer from "./components/BoardRenderer.vue";
 
 import io from "socket.io-client";
 
 export default {
   name: "app",
   components: {
-    Board
+    BoardRenderer
   },
   methods: {
     /* eslint-disable no-console */
@@ -25,15 +29,16 @@ export default {
       this.playedCells = [];
     },
     sendDataToBackend() {
-      const socket = io("http://localhost:8000");
-      alert("sending data to backend");
-      var myObject = {
-        message: "Hello World!"
-      };
-      socket.emit("message", myObject);
-      socket.on("message", function(data) {
-        console.log(data);
-      });
+      // const socket = io("http://localhost:8000");
+      // alert("sending data to backend");
+      // var myObject = {
+      //   message: "Hello World!"
+      // };
+      // socket.emit("message", myObject);
+      // socket.on("message", function(data) {
+      //   console.log(data);
+      // });
+      console.log(this.getDataToSendToBackend());
     },
     cancel() {
       this.playedCells = [];
@@ -48,12 +53,53 @@ export default {
           );
         }
       }
+    },
+    makeBoard(rows, columns) {
+      var result = [];
+      for (var i = 0; i < rows; i++) {
+        var row = [];
+        for (var j = 0; j < columns; j++) {
+          row.push({ id: i + "," + j, value: "n" });
+        }
+        result.push(row);
+      }
+      return result;
+    },
+    getDataToSendToBackend() {
+      return {
+        board: this.board,
+        playerTurn: this.playerTurn,
+        selectedCells: this.getNumberRespresentationOfPlayedCells(),
+        measurementTurn: this.measurementTurn
+      };
+    },
+    getNumberRespresentationOfPlayedCells() {
+      var result = [];
+      for (var i = 0; i < this.playedCells.length; i++) {
+        var coordinates = [];
+        var splittingIndex = this.playedCells[i].indexOf(",");
+        coordinates.push(
+          Number(this.playedCells[i].substring(0, splittingIndex))
+        );
+        coordinates.push(
+          Number(
+            this.playedCells[i].substring(
+              splittingIndex + 1,
+              this.playedCells[i].length
+            )
+          )
+        );
+        result.push(coordinates);
+      }
+      return result;
     }
   },
   data() {
     return {
+      board: this.makeBoard(19, 19),
+      playerTurn: "x",
       playedCells: [],
-      selectedCells: []
+      measurementTurn: 0
     };
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div v-for="line in cells" :key="'line' + line[0].id" class="boardRow">
+    <div v-for="line in board" :key="'line' + line[0].id" class="boardRow">
       <div v-for="cell in line" :key="cell.id" class="boardCell">
         <Cell
           @cellClicked="cellClicked"
@@ -17,39 +17,22 @@
 import Cell from "./Cell.vue";
 
 export default {
-  name: "Board",
+  name: "BoardRenderer",
   components: {
     Cell
   },
   props: {
-    selectedCells: Array
+    selectedCells: Array,
+    board: Array
   },
   methods: {
-    makeBoard(rows, columns) {
-      var result = [];
-      for (var i = 0; i < rows; i++) {
-        var row = [];
-        for (var j = 0; j < columns; j++) {
-          row.push({ id: i + "" + j, value: "n" });
-        }
-        result.push(row);
-      }
-      return result;
-    },
-    print2dArray(matrix) {
-      for (var i = 0; i < matrix.length; i++) {
-        for (var j = 0; j < matrix[i].length; j++) {
-          console.log(matrix[i][j]);
-        }
-      }
-    },
     cellClicked(id) {
       this.$emit("cellClicked", id);
     }
   },
   data() {
     return {
-      cells: this.makeBoard(19, 19)
+      // board: this.makeBoard(19, 19)
     };
   }
 };

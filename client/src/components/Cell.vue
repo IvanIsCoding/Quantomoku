@@ -24,7 +24,7 @@
       @click="clicked"
       :class="this.selected? 'selected' : ''"
     />
-    <!-- <span style="margin-right: 10px">{{id}}</span> -->
+    <!-- <span style="margin-right: 10px; font-size:5px">{{id}}</span> -->
   </div>
 </template>
 
