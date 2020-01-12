@@ -52,9 +52,39 @@ export default {
         case "q_4":
           result = "Ent_Y.gif";
           break;
+        case ">_0":
+          result = "P1sup_B";
+          break;
+        case ">_1":
+          result = "P1sup_G";
+          break;
+        case ">_2":
+          result = "P1sup_P";
+          break;
+        case ">_3":
+          result = "P1sup_R";
+          break;
+        case ">_4":
+          result = "P1sup_Y";
+          break;
+        case "(_0":
+          result = "P2sup_B";
+          break;
+        case "(_1":
+          result = "P2sup_G";
+          break;
+        case "(_2":
+          result = "P2sup_P";
+          break;
+        case "(_3":
+          result = "P2sup_R";
+          break;
+        case "(_4":
+          result = "P2sup_Y";
+          break;
       }
       return result;
-    }, 
+    },
     collapsed() {
       return this.assetPath == "P1.png" || this.assetPath == "P2.png";
     }
