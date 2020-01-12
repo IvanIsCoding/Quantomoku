@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <button @click="sendDataToBackend">send data to backend</button>
     <button @click="confirm">confirm</button>
     <button @click="cancel" :disabled="this.playedCells.length == 0">cancel</button>
     <Board @cellClicked="cellClicked" />
