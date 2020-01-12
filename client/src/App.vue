@@ -73,7 +73,7 @@ export default {
       this.winner = dataFromBackend.winner;
       this.invalid = dataFromBackend.invalid;
       this.invalidMessage = dataFromBackend.invalidMessage;
-      this.playerTurn = [];
+      this.playedCells = [];
     },
     myFun() {
       alert("hey");
