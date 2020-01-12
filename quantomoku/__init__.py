@@ -107,6 +107,7 @@ def check_invalid(board, selected_cells, player_char):
 
 
 def update_board(board, selected_cells, player_char):
+    """Find the next state of the board"""
     if len(selected_cells) == 1:
         x, y = selected_cells[0]  # classical move
         component = get_max_component(board)
@@ -138,7 +139,7 @@ def update_board(board, selected_cells, player_char):
 
 
 def decode_board(original_board):
-
+    """Decode board from 2d matrix of JSONs format"""
     board = []
 
     for row in original_board:
@@ -149,6 +150,7 @@ def decode_board(original_board):
     return board
 
 def encode_board(board):
+    """Encode matrix into 2d matrix of JSONs format"""
 
     json_board = []
 
