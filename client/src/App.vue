@@ -22,12 +22,19 @@ import BoardRenderer from "./components/BoardRenderer.vue";
 import Tutorial from "./components/Tutorial.vue";
 
 import io from "socket.io-client";
+var socket = io("http://localhost:8000");
 
 export default {
   name: "app",
   components: {
     BoardRenderer,
     Tutorial
+  },
+  created() {
+    var __self = this;
+    socket.on("message", function(data) {
+      __self.receiveNewDataFromBackend(data);
+    });
   },
   methods: {
     /* eslint-disable no-console */
@@ -39,11 +46,7 @@ export default {
       this.showTutorial = !this.showTutorial;
     },
     sendDataToBackend() {
-      // console.log("sending", this.getDataToSendToBackend());
-      // const socket = io("http://localhost:8000");
-      // socket.emit("message", this.getDataToSendToBackend());
-      // socket.on("message", function() {});
-      this.receiveNewDataFromBackend(this.getTestBoard());
+      socket.emit("message", this.getDataToSendToBackend());
     },
     cancel() {
       this.playedCells = [];
@@ -69,6 +72,9 @@ export default {
       this.invalid = dataFromBackend.invalid;
       this.invalidMessage = dataFromBackend.invalidMessage;
     },
+    myFun() {
+      alert("hey");
+    },
     cellClicked(id) {
       if (!this.playedCells.includes(id)) {
         if (this.playedCells.length < 2) {
@@ -85,7 +91,7 @@ export default {
       for (var i = 0; i < rows; i++) {
         var row = [];
         for (var j = 0; j < columns; j++) {
-          row.push({ id: i + "," + j, value: "q" });
+          row.push({ id: i + "," + j, value: "n" });
         }
         result.push(row);
       }
