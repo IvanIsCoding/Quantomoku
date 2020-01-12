@@ -1,9 +1,15 @@
 <template>
   <div id="app">
+    turns left before automatic measurement: {{4 - measurementTurn}}
+    <div v-if="measurementTurn == 4">measured at this turn</div>
     <div class="buttons">
       <button @click="openTutorial">tutorial</button>
       <button class="active" @click="sendDataToBackend">confirm</button>
-      <button @click="cancel" :disabled="this.playedCells.length == 0">cancel</button>
+      <button
+        @click="cancel"
+        :disabled="this.playedCells.length == 0"
+        :class="this.playedCells.length == 0? 'forceNoHoverAnimation': ''"
+      >cancel</button>
       <BoardRenderer
         v-if="!showTutorial"
         @cellClicked="cellClicked"
@@ -139,7 +145,6 @@ export default {
       invalid: false,
       invalidMessage: "",
       showTutorial: false,
-      hover: false
     };
   },
   watch: {
@@ -199,5 +204,9 @@ button:hover {
   background-image: url("assets/button_2.gif");
   background-position: 0px -47px;
   background-repeat: no-repeat;
+}
+
+.forceNoHoverAnimation {
+  background: url("assets/button_2.gif") 0 0 no-repeat !important;
 }
 </style>

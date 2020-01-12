@@ -35,13 +35,13 @@ export default {
 
 <style>
 .main {
-  width: 760px;
+  border-color:rgb(117, 54, 2);
+  border-style:solid;
+  border-radius: 5px;
+  border-width: 10px;
+  width: auto;
   display: block;
   margin: auto;
-  padding: 20px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   background-image: url("../assets/board.png");
 }
 
