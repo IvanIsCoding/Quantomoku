@@ -1,22 +1,24 @@
 <template>
   <div class="main">
-    TUTORIAL
     <div class="tutorial" v-if="currentPage == 1">
+      Welcome
       <img src="../assets/Tutorial/1.png" />
     </div>
-    <div v-if="currentPage == 2">
+    <div class="tutorial" v-if="currentPage == 2">
+      The Game
       <img src="../assets/Tutorial/2.png" />
     </div>
-    <div v-if="currentPage == 3">
+    <div class="tutorial" v-if="currentPage == 3">
+      The Game
       <img src="../assets/Tutorial/3.png" />
     </div>
-    <div v-if="currentPage == 4">
+    <div class="tutorial" v-if="currentPage == 4">
       <img src="../assets/Tutorial/4.png" />
     </div>
-    <div v-if="currentPage == 5">
+    <div class="tutorial" v-if="currentPage == 5">
       <img src="../assets/Tutorial/5.png" />
     </div>
-    <div v-if="currentPage == 6">
+    <div class="tutorial" v-if="currentPage == 6">
       <img src="../assets/Tutorial/6.png" />
     </div>
     <button

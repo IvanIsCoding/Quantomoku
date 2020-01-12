@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <div class="buttons">
-      <div v-if="!showTutorial" :class="playerTurn == 'x'? 'player-turn pt-active' : 'player-turn'">
+      <div class="pt-x" v-if="!showTutorial" :class="playerTurn == 'x'? 'player-turn pt-active' : 'player-turn'">
         <img class="player-hl" src="./assets/P1.png" width="45px" height="45px" />
       </div>
       <button v-if="!showTutorial" @click="openTutorial">Tutorial</button>
-      <div v-if="!showTutorial" :class="playerTurn == 'o'? 'player-turn pt-active' : 'player-turn'">
+      <div class="pt-o" v-if="!showTutorial" :class="playerTurn == 'o'? 'player-turn pt-active' : 'player-turn'">
         <img class="player-hl" src="./assets/P2.png" width="45px" height="45px" />
       </div>
       <button v-if="showTutorial" @click="openTutorial">Play Game</button>
