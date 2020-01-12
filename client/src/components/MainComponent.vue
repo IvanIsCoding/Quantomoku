@@ -18,6 +18,12 @@ export default {
       const socket = io("http://localhost:8000");
       alert("devina function called");
       socket.emit("message", "HELLO WORLD");
+      socket.on("message", function(data) {
+      console.log(data);
+      });
+    }, 
+    myFun(fdsfds) {
+      
     }
   }
 };
