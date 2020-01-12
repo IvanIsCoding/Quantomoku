@@ -73,7 +73,7 @@ def check_invalid(board, selected_cells, player_char):
 
     # Check for movements that play with measured cells
     for x, y in selected_cells:
-        if board_matrix[x][y] in ["o", "x"]:
+        if board[x][y] in ["o", "x"]:
             return (True, "Measured cells cannot be selected!")
 
     return (False, "")
@@ -105,9 +105,9 @@ def process_board(game_state):
     """
 
     board = game_state["board"]
-    player_turn = game_state["player_turn"]
-    selected_cells = game_state["selected_cells"]
-    measurement_turn = game_state["measurement_turn"]
+    player_turn = game_state["playerTurn"]
+    selected_cells = game_state["selectedCells"]
+    measurement_turn = game_state["measurementTurn"]
 
     invalid, invalid_message = check_invalid(board, selected_cells, player_turn)
 
@@ -115,11 +115,11 @@ def process_board(game_state):
     if invalid:
         return {
             "board": board,
-            "player_turn": player_turn,
+            "playerTurn": player_turn,
             "winner": get_winner(board),
             "invalid": invalid,
-            "invalid_message": invalid_message,
-            "measurement_turn": measurement_turn,
+            "invalidMessage": invalid_message,
+            "measurementTurn": measurement_turn,
         }
 
     update_board(board, selected_cells, player_turn)  #  do movement
@@ -129,9 +129,9 @@ def process_board(game_state):
 
     return {
         "board": board,
-        "player_turn": next_turn,
+        "playerTurn": next_turn,
         "winner": get_winner(board),
         "invalid": invalid,
-        "invalid_message": invalid_message,
-        "measurement_turn": next_measurement,
+        "invalidMessage": invalid_message,
+        "measurementTurn": next_measurement,
     }
