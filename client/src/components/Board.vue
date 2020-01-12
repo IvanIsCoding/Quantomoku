@@ -3,9 +3,10 @@
     <div v-for="line in cells" :key="'line' + line[0].id" class="boardRow">
       <div v-for="cell in line" :key="cell.id" class="boardCell">
         <Cell
-          :id="cell.id"
           @cellClicked="cellClicked"
+          :id="cell.id"
           :selected="cell.id == selectedCells[0] || cell.id == selectedCells[1]"
+          :value="cell.value"
         />
       </div>
     </div>
@@ -29,11 +30,10 @@ export default {
       for (var i = 0; i < rows; i++) {
         var row = [];
         for (var j = 0; j < columns; j++) {
-          row.push({ id: i + "" + j });
+          row.push({ id: i + "" + j, value: "n" });
         }
         result.push(row);
       }
-      this.print2dArray(result);
       return result;
     },
     print2dArray(matrix) {

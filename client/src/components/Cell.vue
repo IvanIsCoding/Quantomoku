@@ -1,7 +1,24 @@
 <template>
   <div class="board-cell">
     <img
+      v-if="this.value == 'n'"
       src="../assets/P1.png"
+      width="40px"
+      height="40px"
+      @click="clicked"
+      :class="this.selected? 'selected' : ''"
+    />
+    <img
+      v-else-if="this.value=='x'"
+      src="../assets/red_placeholder.png"
+      width="40px"
+      height="40px"
+      @click="clicked"
+      :class="this.selected? 'selected' : ''"
+    />
+    <img
+      v-else-if="this.value=='o'"
+      src="../assets/blue_placeholder.png"
       width="40px"
       height="40px"
       @click="clicked"
@@ -16,7 +33,8 @@ export default {
   name: "Cell",
   props: {
     id: String,
-    selected: Boolean
+    selected: Boolean,
+    value: String
   },
   data() {
     return {
