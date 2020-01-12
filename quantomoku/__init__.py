@@ -6,6 +6,34 @@ except ModuleNotFoundError:
 except ImportError:
     found_qiskit = False
 
+def handle_measurement(component):
+    """Given a component, return the measurements for it"""
+    return None  # not implemented yet 
+
+def global_measurement(board):
+    """Collapse all states"""
+    global found_qiskit
+    if not found_qiskit:
+        return  # we need qiskit installed to collapse the states
+
+    components = [[] for i in range(5)]
+
+    for row_nuber, row in enumerate(board):
+        for col_number, cell in enumerate(row):
+            if "_" in cell:
+                cell_type, cell_component = cell.split("_")
+                cell_component = int(cell_component)
+                components[cell_component].append(
+                    (cell_type, row_nuber, col_number)
+                )
+
+    for component in components:
+        if len(component) == 0:
+            continue  # empty component, nothing to do
+        measurement_result = handle_measurement(component)
+
+
+
 def calculate_score(board_matrix, player_char):
     """Calculate how many five line-ups there are in a board for a given player"""
 
@@ -106,7 +134,7 @@ def check_invalid(board, selected_cells, player_char):
     return (False, "")
 
 
-def update_board(board, selected_cells, player_char):
+def update_board(board, selected_cells, player_char, measurement_turn):
     """Find the next state of the board"""
     if len(selected_cells) == 1:
         x, y = selected_cells[0]  # classical move
@@ -136,6 +164,9 @@ def update_board(board, selected_cells, player_char):
             component = int(board[x1][y1].split("_")[-1])
             board[x0][y0] = "q_{}".format(component)
             board[x1][y1] = "q_{}".format(component)
+
+    if measurement_turn == 0:
+        global_measurement(board)  # time to collapse states
 
 
 def decode_board(original_board):
@@ -201,10 +232,11 @@ def process_board(game_state):
             "measurementTurn": measurement_turn,
         }
 
-    update_board(board, selected_cells, player_turn)  #  do movement
-
     next_turn = "x" if player_turn == "o" else "o"
     next_measurement = (measurement_turn + 1) % 5
+
+    update_board(board, selected_cells, player_turn, next_measurement)  #  do movement
+
 
     return {
         "board": encode_board(board),
