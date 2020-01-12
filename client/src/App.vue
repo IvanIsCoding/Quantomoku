@@ -32,12 +32,22 @@ export default {
       // console.log("sending", this.getDataToSendToBackend());
       const socket = io("http://localhost:8000");
       socket.emit("message", this.getDataToSendToBackend());
-      socket.on("message", function(data) {
-        console.log(data);
+      socket.on("message", function() {
+        receiveNewDataFromBackend({
+          board: [[{id: '0,0', value: 'n'}, {id: '1,0', value: 'n'}], ]
+        });
       });
     },
     cancel() {
       this.playedCells = [];
+    },
+    receiveNewDataFromBackend(dataFromBackend) {
+      this.board = dataFromBackend.board;
+      this.playerTurn = dataFromBackend.playerTurn;
+      this.measurementTurn = dataFromBackend.measurementTurn;
+      this.winner = dataFromBackend.winner;
+      this.invalid = dataFromBackend.invalid;
+      this.invalidMessage = dataFromBackend.invalidMessage;
     },
     cellClicked(id) {
       if (!this.playedCells.includes(id)) {
@@ -92,11 +102,22 @@ export default {
   },
   data() {
     return {
-      board: this.makeBoard(19, 19),
+      board: this.makeBoard(2, 2),
       playerTurn: "x",
       playedCells: [],
-      measurementTurn: 0
+      measurementTurn: 0,
+      winner: "none",
+      invalid: false,
+      invalidMessage: ""
     };
+  },
+  watch: {
+    invalid() {
+      if (this.invalid) {
+        alert(this.invalidMessage);
+        this.invalid = false;
+      }
+    }
   }
 };
 </script>
