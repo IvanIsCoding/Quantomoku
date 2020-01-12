@@ -1,4 +1,4 @@
-from qiskit import Aer, ClassicalRegister, execute, QuantumCircuit, QuantumRegister
+#from qiskit import Aer, ClassicalRegister, execute, QuantumCircuit, QuantumRegister
 
 
 def calculate_score(board_matrix, player_char):
@@ -86,7 +86,6 @@ def update_board(board, selected_cells, player_char):
     else:
         """Not implemented yet"""
         pass
-
 
 def process_board(game_state):
     """Given a dictionary of the game_state containing the keys:

@@ -1,6 +1,6 @@
 from aiohttp import web
 import socketio
-
+from quantomoku import process_board
 sio = socketio.AsyncServer(cors_allowed_origins="*")
 app = web.Application()
 sio.attach(app)
@@ -12,6 +12,8 @@ async def print_message(sid, message):
     # we print the socket ID and the message
     print("Socket ID: " , sid)
     print(message)
+    stuff= process_board(message)
+    #do things with stuff
     await sio.emit('message', message)
 
 # We bind our aiohttp endpoint to our app
