@@ -1,10 +1,13 @@
+
 <template>
   <div class="hello">
     <button @click="devina">call devina function</button>
   </div>
 </template>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
+//const socket = io("http://localhost:8000");
+import io from "socket.io-client"
 export default {
   name: "HelloWorld",
   props: {
@@ -12,7 +15,9 @@ export default {
   },
   methods: {
     devina: function() {
+      const socket = io("http://localhost:8000");
       alert("devina function called");
+      socket.emit("message", "HELLO WORLD");
     }
   }
 };
