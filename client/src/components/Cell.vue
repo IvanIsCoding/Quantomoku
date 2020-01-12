@@ -53,34 +53,48 @@ export default {
           result = "Ent_Y.gif";
           break;
         case ">_0":
-          result = "P1sup_B";
+          result = "P1sup_B.gif";
           break;
         case ">_1":
-          result = "P1sup_G";
+          result = "P1sup_G.gif";
           break;
         case ">_2":
-          result = "P1sup_P";
+          result = "P1sup_P.gif";
           break;
         case ">_3":
-          result = "P1sup_R";
+          result = "P1sup_R.gif";
           break;
         case ">_4":
-          result = "P1sup_Y";
+          result = "P1sup_Y.gif";
           break;
         case "(_0":
-          result = "P2sup_B";
+          result = "P2sup_B.gif";
           break;
         case "(_1":
-          result = "P2sup_G";
+          result = "P2sup_G.gif";
           break;
         case "(_2":
-          result = "P2sup_P";
+          result = "P2sup_P.gif";
           break;
         case "(_3":
-          result = "P2sup_R";
+          result = "P2sup_R.gif";
           break;
         case "(_4":
-          result = "P2sup_Y";
+          result = "P2sup_Y.gif";
+          break;
+        case "x_0":
+        case "x_1":
+        case "x_2":
+        case "x_3":
+        case "x_4":
+          result = "P1_nc.gif";
+          break;
+        case "o_0":
+        case "o_1":
+        case "o_2":
+        case "o_3":
+        case "o_4":
+          result = "P2_nc.gif";
           break;
       }
       return result;
@@ -95,8 +109,8 @@ export default {
 <style scoped>
 .board-cell {
   background: rgba(255, 164, 80, 0.2);
-  
-  margin:1.5px;
+
+  margin: 1.5px;
   max-width: 40px;
   max-height: 40px;
 }
