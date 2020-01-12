@@ -2,9 +2,9 @@
   <div id="app">
     <div  class="buttons" >
     <button @click="openTutorial">Tutorial</button></div>
-    Turns left before automatic measurement: {{4 - measurementTurn}}
+    Turns left before automatic measurement: {{5 - measurementTurn}}
     
-    <div v-if="measurementTurn == 4">Measured at this turn</div>
+    <div v-if="measurementTurn == 5">Measured at this turn</div>
     
     <BoardRenderer
         v-if="!showTutorial"
