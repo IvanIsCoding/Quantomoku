@@ -2,8 +2,7 @@
   <div id="app">
     <div class="buttons">
       <button @click="openTutorial">tutorial</button>
-      <button @click="sendDataToBackend">send data to backend</button>
-      <button class="active" @click="confirm">confirm</button>
+      <button class="active" @click="sendDataToBackend">confirm</button>
       <button @click="cancel" :disabled="this.playedCells.length == 0">cancel</button>
       <BoardRenderer
         v-if="!showTutorial"
@@ -38,10 +37,6 @@ export default {
   },
   methods: {
     /* eslint-disable no-console */
-    confirm() {
-      console.log("confirm with values", this.playedCells);
-      this.playedCells = [];
-    },
     openTutorial() {
       this.showTutorial = !this.showTutorial;
     },
@@ -64,6 +59,13 @@ export default {
         invalidMessage: ""
       };
     },
+    print2dArray(matrix) {
+      for (var i = 0; i < matrix.length; i++) {
+        for (var j = 0; j < matrix[0].length; j++) {
+          console.log(matrix[i][j]);
+        }
+      }
+    },
     receiveNewDataFromBackend(dataFromBackend) {
       this.board = dataFromBackend.board;
       this.playerTurn = dataFromBackend.playerTurn;
@@ -71,6 +73,7 @@ export default {
       this.winner = dataFromBackend.winner;
       this.invalid = dataFromBackend.invalid;
       this.invalidMessage = dataFromBackend.invalidMessage;
+      this.playedCells = [];
     },
     myFun() {
       alert("hey");
@@ -192,11 +195,9 @@ button {
   margin: 0 3px;
 }
 
- button:hover {
+button:hover {
   background-image: url("assets/button_2.gif");
-  background-position: 0px -47px; 
-  background-repeat: no-repeat; 
+  background-position: 0px -47px;
+  background-repeat: no-repeat;
 }
-
-
 </style>
