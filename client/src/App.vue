@@ -39,11 +39,13 @@ export default {
       this.showTutorial = !this.showTutorial;
     },
     sendDataToBackend() {
-      // console.log("sending", this.getDataToSendToBackend());
-      // const socket = io("http://localhost:8000");
-      // socket.emit("message", this.getDataToSendToBackend());
-      // socket.on("message", function() {});
-      this.receiveNewDataFromBackend(this.getTestBoard());
+      console.log("sending", this.getDataToSendToBackend());
+      const socket = io("http://localhost:8000");
+      socket.emit("message", this.getDataToSendToBackend());
+      socket.on("message", function(data) {
+        console.log(data);
+        // this.receiveNewDataFromBackend(data);
+      });
     },
     cancel() {
       this.playedCells = [];
