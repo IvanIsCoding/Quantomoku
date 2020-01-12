@@ -1,22 +1,67 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" width="300px"/>
-    <MainComponent />
+    <button @click="confirm">confirm</button>
+    <button @click="cancel" :disabled="this.playedCells.length == 0">cancel</button>
+    <Board @cellClicked="cellClicked" />
   </div>
 </template>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
-import MainComponent from "./components/MainComponent.vue";
+import Board from "./components/Board.vue";
+
+import io from "socket.io-client";
 
 export default {
   name: "app",
   components: {
-    MainComponent
+    Board
+  },
+  methods: {
+    /* eslint-disable no-console */
+    confirm() {
+      console.log("confirm with values", this.playedCells);
+      this.playedCells = [];
+    },
+    sendDataToBackend() {
+      const socket = io("http://localhost:8000");
+      alert("sending data to backend");
+      var myObject = {
+        message: "Hello World!"
+      };
+      socket.emit("message", myObject);
+      socket.on("message", function(data) {
+        console.log(data);
+      });
+    },
+    cancel() {
+      this.playedCells = [];
+    },
+    cellClicked(id) {
+      if (this.playedCells.length < 2) {
+        this.playedCells.push(id);
+      } else {
+        alert(
+          "You can't play more than 2 cells. Click cancel to play other cells."
+        );
+      }
+    }
+  },
+  data() {
+    return {
+      playedCells: []
+    };
   }
 };
 </script>
 
 <style>
+html {
+  background-image: url("assets/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
