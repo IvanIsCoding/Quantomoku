@@ -36,16 +36,28 @@ export default {
   },
   data() {
     return {
-      cells: this.make2dArray(19, 19)
+      cells: this.make2dArray(18, 19)
     };
   }
 };
 </script>
 
 <style>
+.main{
+  width: 760px;
+  display: block;
+  margin: auto;
+  padding: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;   
+  background-image: url('../assets/board.png');
+
+}
 
 .boardRow {
-  display: flex;
+  display: table-cell;
+  justify-content: center;
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" width="300px" />
+    <!-- <img alt="Vue logo" src="./assets/logo.png" width="300px" /> -->
     <Board />
   </div>
 </template>
@@ -17,6 +17,12 @@ export default {
 </script>
 
 <style>
+html{
+  background-image: url('assets/bg.png');
+  background-size: cover;
+  background-repeat: no-repeat; 
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

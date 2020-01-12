@@ -1,6 +1,6 @@
 <template>
   <div class="board-cell">
-    <img src="../assets/cell.png" width="20px" height="20px" />
+    <img src="../assets/P1.png" width="40px" height="40px" />
   </div>
 </template>
 
@@ -15,9 +15,9 @@ export default {
 
 <style scoped>
 .board-cell{
-  background: red;
-  max-width: 20px;
-  max-height: 20px;
+  
+  max-width: 40px;
+  max-height: 40px;
   
 }
 img {
