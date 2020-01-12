@@ -32,16 +32,26 @@ export default {
     },
     sendDataToBackend() {
       // console.log("sending", this.getDataToSendToBackend());
-      const socket = io("http://localhost:8000");
-      socket.emit("message", this.getDataToSendToBackend());
-      socket.on("message", function() {
-        receiveNewDataFromBackend({
-          board: [[{id: '0,0', value: 'n'}, {id: '1,0', value: 'n'}], ]
-        });
-      });
+      // const socket = io("http://localhost:8000");
+      // socket.emit("message", this.getDataToSendToBackend());
+      // socket.on("message", function() {});
+      this.receiveNewDataFromBackend(this.getTestBoard());
     },
     cancel() {
       this.playedCells = [];
+    },
+    getTestBoard() {
+      return {
+        board: [
+          [{ id: "0,0", value: "o" }, { id: "1,0", value: "x" }],
+          [{ id: "0,1", value: "n" }, { id: "1,1", value: "n" }]
+        ],
+        playerTurn: "x",
+        measurementTurn: 0,
+        winner: "o",
+        invalid: false,
+        invalidMessage: ""
+      };
     },
     receiveNewDataFromBackend(dataFromBackend) {
       this.board = dataFromBackend.board;
@@ -104,7 +114,7 @@ export default {
   },
   data() {
     return {
-      board: this.makeBoard(2, 2),
+      board: this.makeBoard(19, 19),
       playerTurn: "x",
       playedCells: [],
       measurementTurn: 0,
@@ -118,6 +128,14 @@ export default {
       if (this.invalid) {
         alert(this.invalidMessage);
         this.invalid = false;
+        this.invalidMessage = "";
+      }
+    },
+    winner() {
+      if (this.winner == "x") {
+        alert("X WINS!");
+      } else if (this.winner == "o") {
+        alert("O WINS!");
       }
     }
   }

@@ -29,11 +29,6 @@ export default {
     cellClicked(id) {
       this.$emit("cellClicked", id);
     }
-  },
-  data() {
-    return {
-      // board: this.makeBoard(19, 19)
-    };
   }
 };
 </script>

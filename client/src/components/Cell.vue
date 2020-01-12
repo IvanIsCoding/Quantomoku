@@ -1,24 +1,7 @@
 <template>
   <div class="board-cell">
     <img
-      v-if="this.value == 'n'"
-      src="../assets/P1.png"
-      width="40px"
-      height="40px"
-      @click="clicked"
-      :class="this.selected? 'selected' : ''"
-    />
-    <img
-      v-else-if="this.value=='x'"
-      src="../assets/red_placeholder.png"
-      width="40px"
-      height="40px"
-      @click="clicked"
-      :class="this.selected? 'selected' : ''"
-    />
-    <img
-      v-else-if="this.value=='o'"
-      src="../assets/blue_placeholder.png"
+      :src="require( `../assets/${this.assetPath}`)"
       width="40px"
       height="40px"
       @click="clicked"
@@ -36,14 +19,41 @@ export default {
     selected: Boolean,
     value: String
   },
-  data() {
-    return {
-      // selected: false
-    };
-  },
   methods: {
     clicked() {
       this.$emit("cellClicked", this.id);
+    }
+  },
+  computed: {
+    assetPath() {
+      var result = "P1";
+      switch (this.value) {
+        case "n":
+          result = "none.png";
+          break;
+        case "x":
+          result = "P1.png";
+          break;
+        case "o":
+          result = "P2.png";
+          break;
+        case "q_0":
+          result = "Ent_B.gif";
+          break;
+        case "q_1":
+          result = "Ent_G.gif";
+          break;
+        case "q_2":
+          result = "Ent_P.gif";
+          break;
+        case "q_3":
+          result = "Ent_R.gif";
+          break;
+        case "q_4":
+          result = "Ent_Y.gif";
+          break;
+      }
+      return result;
     }
   }
 };
