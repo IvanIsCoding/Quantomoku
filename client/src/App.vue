@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    turns before automatic measurement: {{4 - measurementTurn}}
+    <div v-if="measurementTurn == 4">measured at this turn</div>
     <div class="buttons">
       <button @click="openTutorial">tutorial</button>
       <button class="active" @click="sendDataToBackend">confirm</button>

@@ -5,7 +5,7 @@
       width="40px"
       height="40px"
       @click="clicked"
-      :class="this.selected? 'selected' : ''"
+      :class="this.selected? 'selected' : '' + (this.collapsed? ' collapsed' : '')"
     />
     <!-- <span style="margin-right: 10px; font-size:5px">{{id}}</span> -->
   </div>
@@ -54,6 +54,9 @@ export default {
           break;
       }
       return result;
+    }, 
+    collapsed() {
+      return this.assetPath == "P1.png" || this.assetPath == "P2.png";
     }
   }
 };
@@ -70,6 +73,9 @@ img {
   opacity: 0.5;
 }
 .selected {
+  opacity: 1;
+}
+.collapsed {
   opacity: 1;
 }
 </style>
