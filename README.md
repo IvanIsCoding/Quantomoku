@@ -55,7 +55,7 @@ To discover more about the mechanics of the game, there is an in game tutorial: 
 * [Vue.js](https://vuejs.org/) - Front end
 * [Python](https://www.python.org/) - Back end
 * [Qiskit](https://qiskit.org/) - Used for building quantum circuits and executing them on real quantum computers at IBM Quantum Experience
-* [Socket.IO](https://rometools.github.io/rome/) - Used to communicate between the front end and the back end
+* [Socket.IO](https://socket.io/) - Used to communicate between the front end and the back end
 
 ## Authors
 
