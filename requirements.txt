@@ -1,0 +1,3 @@
+qiskit
+aiohttp
+python-socketio

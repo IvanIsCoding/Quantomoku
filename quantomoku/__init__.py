@@ -1,13 +1,22 @@
 import os
 
 try:
-    from qiskit import Aer, ClassicalRegister, execute, IBMQ, QuantumCircuit, QuantumRegister
+    from qiskit import (
+        Aer,
+        ClassicalRegister,
+        execute,
+        IBMQ,
+        QuantumCircuit,
+        QuantumRegister,
+    )
     from qiskit.providers.ibmq import least_busy
+
     found_qiskit = True
 except ModuleNotFoundError:
     found_qiskit = False
 except ImportError:
     found_qiskit = False
+
 
 def decode_bitstring(bitstring):
     """Recover the Xs, Os and Ns from a bit string"""
@@ -22,12 +31,14 @@ def decode_bitstring(bitstring):
 
     return answer
 
+
 def get_circuit_result(backend, circuit):
     """Given a circuit, executes it one time and gets the measurement"""
     job = execute(circuit, backend=backend, shots=1)
     result = job.result()
     counts = result.get_counts()
-    return list(counts.keys())[0]    
+    return list(counts.keys())[0]
+
 
 def handle_measurement(component):
     """Given a component, return the measurements for it"""
@@ -59,29 +70,25 @@ def handle_measurement(component):
         circuit.x(3)
         circuit.cx(1, 3)
 
-    circuit.measure(
-        list(range(N)),
-        list(reversed(range(N))),
-    )
+    circuit.measure(list(range(N)), list(reversed(range(N))))
 
     if os.getenv("IBM_Q"):
         IBMQ.load_account()
-        provider = IBMQ.get_provider(hub='ibm-q')
+        provider = IBMQ.get_provider(hub="ibm-q")
         # Notice: for playability, if all quantum computers are busy
         # We may recommend running it on an online  32-qubit simulator. Change the simulator flag to True
         # For allowing using a simulator
         backend = least_busy(
             provider.backends(
-                filters=lambda x: x.configuration().n_qubits >= N and x.configuration().simulator == False
+                filters=lambda x: x.configuration().n_qubits >= N
+                and x.configuration().simulator == False
             )
         )
     else:
         backend = Aer.get_backend("qasm_simulator")
 
     bitstring = get_circuit_result(backend, circuit)
-    answer_symbols = decode_bitstring(
-        bitstring
-    )
+    answer_symbols = decode_bitstring(bitstring)
 
     for index, symbol_answer in enumerate(answer_symbols):
         sorted_symbols[index][0] = symbol_answer
